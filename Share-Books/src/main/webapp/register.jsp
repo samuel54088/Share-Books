@@ -87,7 +87,7 @@ class DB {
 			System.out.println("Creating statement...");
 			stmt = conn.createStatement();
 
-			String sql = "SELECT * FROM sharebooks.user_data where username='" + info[0] + "' and email='" + info[1]
+			String sql = "SELECT * FROM sharebooks.user_data where username='" + info[0] + "' or email='" + info[1]
 					+ "'";
 			ResultSet rs = stmt.executeQuery(sql);
 
