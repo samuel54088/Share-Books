@@ -1,6 +1,6 @@
 package p2;
 
-public class TEST {
+public class Hello {
 	public String m1() {
 		return "Hi~";
 	}
