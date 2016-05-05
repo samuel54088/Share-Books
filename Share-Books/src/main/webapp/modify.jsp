@@ -1,8 +1,28 @@
 <%@page import="java.sql.*" %>
-<%@page contentType="text/html; charset=UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <html>
 <body>
 <%
+
+%>
+<%
+class User {
+	String mail, pwd;
+	public void setMail(String mail) {
+		this.mail = mail;
+	}
+	public void setPassword(String pwd) {
+		this.pwd = pwd;
+	}
+	
+	public String getMail() {
+		return this.mail;
+	}
+	public String getPassword() {
+		return this.pwd;
+	}
+}
 class DB {
 	private final String DB_URL = "jdbc:mysql://140.134.26.83/sharebooks";
 
@@ -68,6 +88,7 @@ class DB {
 		return result;
 	}
 
+	
 	public Boolean Reg(String info[]) { //info{username,email,pw,phone}
 		if (info.length != 4) {
 			return false;
@@ -125,40 +146,106 @@ class DB {
 
 		return true;
 	}
+	public Boolean Modify(String info[]) { //info{username,email,pw,phone}
+		if (info.length != 6) {
+			return false;
+		}
+		
+		Connection conn = null;
+		Statement stmt = null;
+		try {
+			// STEP 2: Register JDBC driver
+			Class.forName("com.mysql.jdbc.Driver");
+
+			// STEP 3: Open a connection
+			System.out.println("Connecting to database...");
+			conn = DriverManager.getConnection(DB_URL, USER, PASS);
+
+			// STEP 4: Execute a query
+			System.out.println("Creating statement...");
+			stmt = conn.createStatement();
+			String sql = "SET SQL_SAFE_UPDATES = 0";
+			stmt.executeUpdate(sql);
+			if(info[0]!=""){
+				sql = "update sharebooks.user_data set username =  '" + info[0] + "' where email = '" + info[4] +"' and pw = '" + info[5] + "'";
+				stmt.executeUpdate(sql);
+			}
+			if(info[1]!=""){
+				sql = "update sharebooks.user_data set email =  '" + info[1] + "' where email = '" + info[4] + "' and pw = '" + info[5] + "'";
+				stmt.executeUpdate(sql);
+				info[4] = info[1];
+			}
+			if(info[2]!=""){
+				sql = "update sharebooks.user_data set pw =  '" + info[2] + "' where email = '" + info[4] + "' and pw = '" + info[5] + "'";
+				stmt.executeUpdate(sql);
+				info[5] = info[2];
+			}
+			if(info[3]!=""){
+				sql = "update sharebooks.user_data set phone =  '" + info[3] + "' where email = '" + info[4] + "' and pw = '" + info[5] + "'";
+				stmt.executeUpdate(sql);
+			}
+			stmt.close();
+			conn.close();
+		} catch (SQLException se) {
+			// Handle errors for JDBC
+			se.printStackTrace();
+		} catch (Exception e) {
+			// Handle errors for Class.forName
+			e.printStackTrace();
+		} finally {
+			// finally block used to close resources
+			try {
+				if (stmt != null)
+					stmt.close();
+			} catch (SQLException se2) {
+			} // nothing we can do
+			try {
+				if (conn != null)
+					conn.close();
+			} catch (SQLException se) {
+				se.printStackTrace();
+			} // end finally try
+		} // end try
+
+		return true;
+	}
 }
 %>
 
 <%
 	DB d = new DB();
+				
+	String obj_mail = (String) session.getAttribute("EMAIL");
+	String obj_pwd = (String) session.getAttribute("PWD");
+	
+	String name = request.getParameter("userName");
 	String mail = request.getParameter("email");
 	String pwd = request.getParameter("password");
-	session.setAttribute("EMAIL",request.getParameter("email")); //抓使用者信箱、密碼，修改資料可以利用session去update資料庫
-	session.setAttribute("PWD",request.getParameter("password"));
-	String[] infomation = d.Auth(mail, pwd);
+	String phone = request.getParameter("phone");
 				
-	if(infomation[1] != null) 
-		out.print("Hello  " + infomation[1] + ", 您已經登入成功!!" + "<br/>");
+	String[] infomation = {name, mail, pwd, phone,obj_mail,obj_pwd};
+				
+	
+	if(d.Modify(infomation)) {
+		out.print("修改成功!!" + "<br/>");
+		out.print("姓名修改為: " + name + "<br>");
+		out.print("信箱修改為: " + mail + "<br>");
+		out.print("密碼修改為: " + pwd + "<br>");
+		out.print("電話修改為: " + phone + "<br>");
+		//out.print("test session mail: " + obj_mail + "<br>");
+		//out.print("test session pwd: " + obj_pwd + "<br>");
+		
+	}
 	else
-		out.print("登入失敗!!" + "<br/>");
+		out.print("修改失敗!!" + "<br/>");
 		
 	
+%>
+<%
 %>
 <input type="button" name="goToIndexPage" onclick="javascript:location.href='index.jsp'" value="回首頁">
 <br/><br/>
 <%
-out.print("<form method=\"POST\" action=\"Modify.html\">");
-out.print("<input name=\"email\" type=\"hidden\"  value=" + mail + ">");
-out.print("<input name=\"pwd\" type=\"hidden\"  value=" + pwd + ">");
-out.print("<input type=\"submit\" value=\"修改會員資料\">");
-out.print("</form>");
-%>
-<%
-/*
-String session_mail = mail; 
-String session_pwd = pwd;
-Object obj_mail = session.getAttribute("mail");
-Object obj_pwd = session.getAttribute("pwd");
-*/
 %>
 </body>
 </html>
