@@ -135,12 +135,16 @@ class DB {
 	
 	String[] infomation = d.Auth(mail, pwd);
 				
-	if(infomation[1] != null) 
+	if(infomation[1] != null) {
 		out.print("Hello  " + infomation[1] + ", 您已經登入成功!!" + "<br/>");
-	else
+		session.setAttribute("uid",infomation[0]);
+	}
+	else {
 		out.print("登入失敗!!" + "<br/>");
-		
+		session.setAttribute("uid","fail");
+	}
 %>
 <input type="button" name="goToIndexPage" onclick="javascript:location.href='index.jsp'" value="回首頁">
+<input type="button" name="Lend_Book" onclick="javascript:location.href='Lend.html'" value="借書">
 </body>
 </html>
