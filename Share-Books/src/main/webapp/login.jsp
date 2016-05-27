@@ -26,5 +26,10 @@ out.print("<input name=\"pwd\" type=\"hidden\"  value=" + pwd + ">");
 out.print("<input type=\"submit\" value=\"修改會員資料\">");
 out.print("</form>");
 %>
+<%
+out.print("<form method=\"POST\" action=\"Update_book_owner.html\">");
+out.print("<input type=\"submit\" value=\"分享書籍\">");
+out.print("</form>");
+%>
 </body>
 </html>

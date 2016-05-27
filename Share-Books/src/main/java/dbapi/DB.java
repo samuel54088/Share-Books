@@ -324,4 +324,87 @@ public class DB {
 
 		return true;
 	}
+	
+	
+	public String update_book_owner(String isbn , String email, String passwd) {
+		//String[] result = new String[2];
+		
+		if (isbn.equals("")) {
+			return  "noinput"; //使用者沒輸入資料
+		}
+		
+		String[] id_buffer = new String[2];
+		Connection conn = null;
+		Statement stmt = null;
+
+		try {
+			// STEP 2: Register JDBC driver
+			Class.forName("com.mysql.jdbc.Driver");
+
+			// STEP 3: Open a connection
+			System.out.println("Connecting to database...");
+			conn = DriverManager.getConnection(DB_URL, USER, PASS);
+
+			// STEP 4: Execute a query
+			System.out.println("Creating statement...");
+			stmt = conn.createStatement();
+			String sql = "SELECT * FROM sharebooks.book_data where isbn_10='" + isbn + "'";
+			ResultSet rs = stmt.executeQuery(sql);
+
+			if (rs.next()==false) { //書籍資料庫中有這本書
+				return "insert";
+			}
+			rs.close();
+			
+
+			sql = "SELECT * FROM sharebooks.user_data where email='" + email + "' and pw = '" + passwd + "'";
+			ResultSet rs_user_id = stmt.executeQuery(sql);
+			if(rs_user_id.next()){
+				id_buffer[0] = Integer.toString(rs_user_id.getInt("id"));	
+			}
+			else{
+				
+			}
+			rs_user_id.close();
+			
+			sql = "SELECT * FROM sharebooks.book_data where isbn_10='" + isbn + "'";
+			ResultSet rs_book_id = stmt.executeQuery(sql);
+			if(rs_book_id.next()){
+				id_buffer[1] = Integer.toString(rs_book_id.getInt("id"));
+			}
+			else{
+				
+			}
+			rs_book_id.close();
+			
+			sql = "insert into sharebooks.book_owner(uid,bid,lend_state) values('"
+					+ id_buffer[0] + "','" + id_buffer[1] + "','0')";
+			stmt.executeUpdate(sql);
+
+			stmt.close();
+			conn.close();
+		} catch (SQLException se) {
+			// Handle errors for JDBC
+			se.printStackTrace();
+		} catch (Exception e) {
+			// Handle errors for Class.forName
+			e.printStackTrace();
+		} finally {
+			// finally block used to close resources
+			try {
+				if (stmt != null)
+					stmt.close();
+			} catch (SQLException se2) {
+			} // nothing we can do
+			try {
+				if (conn != null)
+					conn.close();
+			} catch (SQLException se) {
+				se.printStackTrace();
+			} // end finally try
+		} // end try
+
+		return "分享成功";
+	}
 }
+
