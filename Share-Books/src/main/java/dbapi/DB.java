@@ -273,6 +273,72 @@ public class DB {
 		return result;
 	}
 
+	public String[][] query(String email) {
+		String[][] result = new String[0][0];
+
+		Connection conn = null;
+		Statement stmt = null;
+
+		try {
+			// STEP 2: Register JDBC driver
+			Class.forName("com.mysql.jdbc.Driver");
+
+			// STEP 3: Open a connection
+			System.out.println("Connecting to database...");
+			conn = DriverManager.getConnection(DB_URL, USER, PASS);
+
+			// STEP 4: Execute a query
+			System.out.println("Creating statement...");
+			stmt = conn.createStatement();
+			stmt = conn.createStatement();
+			String sql = "SELECT * FROM sharebooks.user_data where email='" + email + "'";
+			ResultSet rs = stmt.executeQuery(sql);
+			String uid = "";
+			if (rs.next()) {
+				uid = Integer.toString(rs.getInt("id"));
+			}
+			sql = "SELECT * FROM book_lender where owner_id='" + uid + "'";
+			rs = stmt.executeQuery(sql);
+
+			// STEP 5: Extract data from result set
+			rs.last();
+			result = new String[rs.getRow()][6];
+			rs.beforeFirst();
+			int rscount = 0;
+			while (rs.next()) {
+				result[rscount][0] = Integer.toString(rs.getInt("uid"));
+				result[rscount][1] = Integer.toString(rs.getInt("bid"));
+				result[rscount][2] = Integer.toString(rs.getInt("owner_id"));
+				result[rscount][3] = Integer.toString(rs.getInt("borrow_state"));
+				result[rscount][4] = rs.getTime("updated").toString();
+				result[rscount][5] = rs.getTime("created").toString();
+				rscount++;
+			}
+			rs.close();
+			conn.close();
+		} catch (SQLException se) {
+			// Handle errors for JDBC
+			se.printStackTrace();
+		} catch (Exception e) {
+			// Handle errors for Class.forName
+			e.printStackTrace();
+		} finally {
+			// finally block used to close resources
+			try {
+				if (stmt != null)
+					stmt.close();
+			} catch (SQLException se2) {
+			} // nothing we can do
+			try {
+				if (conn != null)
+					conn.close();
+			} catch (SQLException se) {
+				se.printStackTrace();
+			} // end finally try
+		} // end try
+		return result;
+	}
+
 	public Boolean add_book_data(String[] info) {
 		if (info.length != 6) {
 			return false;
