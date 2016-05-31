@@ -222,7 +222,7 @@ public class DB {
 
 			if (rs.next()) {
 
-				sql = "SELECT * FROM sharebooks.book_lender where bid='" + bid + "' and uid='" + uid + "'";
+				sql = "SELECT * FROM sharebooks.book_lender where bid='" + bid + "' and uid='" + uid + "' and borrow_state=0";
 				ResultSet otherrs = stmt.executeQuery(sql);
 
 				if (otherrs.next()) {
