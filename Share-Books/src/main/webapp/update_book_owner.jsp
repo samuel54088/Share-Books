@@ -28,5 +28,5 @@
 	
 %>
 <br/>
-<input type="button" name="goToIndexPage" onclick="javascript:location.href='index.jsp'" value="回首頁">
+<input type="button" name="goToIndexPage" onclick="javascript:location.href='login.jsp'" value="回首頁">
 </body>
