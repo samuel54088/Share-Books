@@ -8,11 +8,6 @@
 	String obj_mail = (String) session.getAttribute("EMAIL");
 	String obj_pwd = (String) session.getAttribute("PWD");
 	String isbn =request.getParameter("isbn");
-if(true){
-	out.print("obj_mail:" + obj_mail + "<br/>");
-	out.print("obj_pwd:" + obj_pwd + "<br/>");
-	out.print("isbn:" + isbn + "<br/>");
-}
 
 	String infomation = d.update_book_owner(isbn , obj_mail , obj_pwd);
 
