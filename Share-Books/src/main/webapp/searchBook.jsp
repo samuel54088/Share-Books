@@ -5,15 +5,15 @@
 <head>
 <meta charset="UTF-8">
 </head>
-<h1><font face="微軟正黑體"><b> 關鍵字： <% out.println(request.getParameter("keyword")); %>  </b></font></h1>
 <%
 request.setCharacterEncoding("UTF-8");
+String keyword = request.getParameter("keyword");
+%>
+<h1><font face="微軟正黑體"><b> 關鍵字： <% out.println(keyword); %>  </b></font></h1>
+<%
+
 DB db = new DB();
 String[][] bookInfo = db.getBookInfo();
-/*out.print("所有書籍名稱：<br/>");
-for( int i=0 ; i<bookInfo.length ; i++) {
-	out.print(bookInfo[i][0] + "<br/>");
-} */
 
 %>
 <body>
@@ -23,17 +23,26 @@ for( int i=0 ; i<bookInfo.length ; i++) {
     <td align="center"><b>作者<b/></td>
     <td align="center" width="80"><b>出版日期<b/></td>
     <td align="center"><b>出版商<b/></td>
-    <td align="center"><b>書籍描述<b/></td>
   </tr>
   <%
   	for (int i = 0; i < bookInfo.length; i++) {
-  		out.print("<tr>");
-  		for(int j=0 ; j< bookInfo[0].length; j++)
-  			out.print("<td>" + bookInfo[i][j] + "</td>");
-  		out.print("<tr/>");
+  		if(bookInfo[i][1].toLowerCase().lastIndexOf(keyword.toLowerCase()) != -1) {
+  			out.print("<tr>");
+  	  		for(int j=1 ; j< bookInfo[0].length-1; j++) { // -1是為了不顯示書籍描述
+  	  			if( j==1 ) 
+  	  				out.print("<td><a href='BookInfo.jsp?ID=" + bookInfo[i][0] + "'//>" + bookInfo[i][j] + "</a></td>");
+  	  			else
+  	  				out.print("<td>" + bookInfo[i][j] + "</td>");
+  	  		}
+  	  			
+  	  		out.print("<tr/>");
+  		}
   	}
   %>
   
 </table>
+<%
+out.print("總共有 " + db.getBookNumber() +"本書");
+%>
 </body>
 </html>

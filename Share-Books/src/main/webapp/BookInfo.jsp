@@ -13,38 +13,39 @@
 	String[] OwnerInfoBuf = new String[7];
 
 	DB d = new DB();
-	bookInfoBuf = d.readBookInfo("1");
-	OwnerInfoBuf = d.readUserInfo("3");
+	String bookID = request.getParameter("ID");
+	bookInfoBuf = d.readBookInfo(bookID);
+	OwnerInfoBuf = d.readUserInfo(d.getUserID(bookID));
 
 	
 	if(bookInfoBuf!= null)
 	{
-		out.print("Product Details:" + "<br/>");
+		out.print("<h2>書籍詳細資料" + "</h1>");
 		out.print("ISBN: " + bookInfoBuf[1] + "<br>");
-		out.print("Name: " + bookInfoBuf[2] + "<br>");
-		out.print("Description: " + bookInfoBuf[3] + "<br>");
-		out.print("Author: " + bookInfoBuf[4] + "<br>");
-		out.print("Publisher: " + bookInfoBuf[5] + "<br>");
-		out.print("Publish Date: " + bookInfoBuf[6] + "<br>");
+		out.print("書籍名稱: " + bookInfoBuf[2] + "<br>");
+		out.print("書籍描述: " + bookInfoBuf[3] + "<br>");
+		out.print("作者: " + bookInfoBuf[4] + "<br>");
+		out.print("出版商: " + bookInfoBuf[5] + "<br>");
+		out.print("出版日期: " + bookInfoBuf[6] + "<br>");
 	}
 	else
 	{
-		out.print("error");
+		out.print("查無此書籍");
 	}
 	
-	out.print("<br/><br/><br/>");
+	out.print("<br/>");
 	
 	
 	if(OwnerInfoBuf!= null)
 	{
-		out.print("Owner Details:" + "<br/>");
-		out.print("Name: " + OwnerInfoBuf[1] + "<br>");
-		out.print("E-mail: " + OwnerInfoBuf[2] + "<br>");
-		out.print("Phone: " + OwnerInfoBuf[3] + "<br>");
+		out.print("<h2>書籍擁有者聯絡資料：" + "</h1>");
+		out.print("姓名：" + OwnerInfoBuf[1] + "<br>");
+		out.print("電子郵件：" + OwnerInfoBuf[2] + "<br>");
+		out.print("連絡電話：" + OwnerInfoBuf[3] + "<br>");
 	}
 	else
 	{
-		out.print("error");
+		out.print("<br/><br/>此書籍沒有主人");
 	}
 	
 	
