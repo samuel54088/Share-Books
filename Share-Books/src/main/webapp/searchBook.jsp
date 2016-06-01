@@ -5,15 +5,15 @@
 <head>
 <meta charset="UTF-8">
 </head>
-<h1><font face="微軟正黑體"><b> 關鍵字： <% out.println(request.getParameter("keyword")); %>  </b></font></h1>
 <%
 request.setCharacterEncoding("UTF-8");
+String keyword = request.getParameter("keyword");
+%>
+<h1><font face="微軟正黑體"><b> 關鍵字： <% out.println(keyword); %>  </b></font></h1>
+<%
+
 DB db = new DB();
 String[][] bookInfo = db.getBookInfo();
-/*out.print("所有書籍名稱：<br/>");
-for( int i=0 ; i<bookInfo.length ; i++) {
-	out.print(bookInfo[i][0] + "<br/>");
-} */
 
 %>
 <body>
@@ -27,10 +27,13 @@ for( int i=0 ; i<bookInfo.length ; i++) {
   </tr>
   <%
   	for (int i = 0; i < bookInfo.length; i++) {
-  		out.print("<tr>");
-  		for(int j=0 ; j< bookInfo[0].length; j++)
-  			out.print("<td>" + bookInfo[i][j] + "</td>");
-  		out.print("<tr/>");
+  		if(bookInfo[i][0].toLowerCase().lastIndexOf(keyword.toLowerCase()) != -1) {
+  			out.print("<tr>");
+  	  		for(int j=0 ; j< bookInfo[0].length; j++)
+  	  			out.print("<td>" + bookInfo[i][j] + "</td>");
+  	  		out.print("<tr/>");
+  		}
+  		
   	}
   %>
   
