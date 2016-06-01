@@ -33,7 +33,9 @@
 <form method="POST" action="Update_book_owner.html">
 <input type="submit" value="分享書籍">
 </form>
-
+<form method="GET" action="query.jsp">
+<input type="submit" value="出借記錄">
+</form>
 <a href="index.jsp">回首頁</a>
 </body>
 </html>
