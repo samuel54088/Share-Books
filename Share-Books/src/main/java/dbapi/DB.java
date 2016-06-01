@@ -310,9 +310,25 @@ public class DB {
 				result[rscount][1] = Integer.toString(rs.getInt("bid"));
 				result[rscount][2] = Integer.toString(rs.getInt("owner_id"));
 				result[rscount][3] = Integer.toString(rs.getInt("borrow_state"));
-				result[rscount][4] = rs.getTime("updated").toString();
-				result[rscount][5] = rs.getTime("created").toString();
+				//result[rscount][4] = rs.getTime("updated").toString();
+				//result[rscount][5] = rs.getTime("created").toString();
 				rscount++;
+			}
+			for(int i=0;i<result.length;i++){
+				sql = "SELECT * FROM user_data where id='" + result[i][0] + "'";
+				rs = stmt.executeQuery(sql);
+				rs.next();
+				result[i][0]=rs.getString("username");
+				
+				sql = "SELECT * FROM book_data where id='" + result[i][1] + "'";
+				rs = stmt.executeQuery(sql);
+				rs.next();
+				result[i][1]=rs.getString("bookname");
+				
+				sql = "SELECT * FROM user_data where id='" + result[i][2] + "'";
+				rs = stmt.executeQuery(sql);
+				rs.next();
+				result[i][2]=rs.getString("username");
 			}
 			rs.close();
 			conn.close();
