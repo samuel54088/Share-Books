@@ -3,6 +3,7 @@
 <html>
 <body>
 <%
+	request.setCharacterEncoding("UTF-8");
 	DB d = new DB();
 	String[] info=new String[6];
 	info[0]=request.getParameter("isbn");

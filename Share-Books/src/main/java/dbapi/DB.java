@@ -9,7 +9,7 @@ import java.util.*;
 import java.text.*;
 
 public class DB {
-	private final String DB_URL = "jdbc:mysql://140.134.26.83/sharebooks";
+	private final String DB_URL = "jdbc:mysql://140.134.26.83/sharebooks?useUnicode=true&characterEncoding=UTF-8";
 
 	// Database credentials
 	private final String USER = "sharebooks";
