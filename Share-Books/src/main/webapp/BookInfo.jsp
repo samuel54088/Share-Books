@@ -45,7 +45,7 @@
 	}
 	else
 	{
-		out.print("此書籍沒有主人");
+		out.print("<br/><br/>此書籍沒有主人");
 	}
 	
 	
