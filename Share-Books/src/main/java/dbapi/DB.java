@@ -9,7 +9,7 @@ import java.util.*;
 import java.text.*;
 
 public class DB {
-	private final String DB_URL = "jdbc:mysql://140.134.26.83/sharebooks";
+	private final String DB_URL = "jdbc:mysql://140.134.26.83/sharebooks?useUnicode=true&characterEncoding=UTF-8";
 
 	// Database credentials
 	private final String USER = "sharebooks";
@@ -638,17 +638,17 @@ public class DB {
 
 			String sql = "SELECT * FROM sharebooks.book_data";
 			ResultSet rs = stmt.executeQuery(sql);
-			result = new String[6][5];
+			result = new String[getBookNumber()][6];
 			// STEP 5: Extract data from result set
 
 			int i = 0;
 			while (rs.next()) {
-
-				result[i][0] = new String(rs.getString("bookname").getBytes("utf-8"), "utf-8");
-				result[i][1] = new String(rs.getString("author").getBytes("utf-8"), "utf-8");
-				result[i][2] = new String(rs.getString("publish_date").getBytes("utf-8"), "utf-8");
-				result[i][3] = new String(rs.getString("publisher").getBytes("utf-8"), "utf-8");
-				result[i][4] = new String(rs.getString("description").getBytes("utf-8"), "utf-8");
+				result[i][0] = Integer.toString(rs.getInt("id"));
+				result[i][1] = new String(rs.getString("bookname").getBytes("utf-8"), "utf-8");
+				result[i][2] = new String(rs.getString("author").getBytes("utf-8"), "utf-8");
+				result[i][3] = new String(rs.getString("publish_date").getBytes("utf-8"), "utf-8");
+				result[i][4] = new String(rs.getString("publisher").getBytes("utf-8"), "utf-8");
+				result[i][5] = new String(rs.getString("description").getBytes("utf-8"), "utf-8");
 				i++;
 
 			}
@@ -676,5 +676,99 @@ public class DB {
 			} // end finally try
 		} // end try
 		return result;
+	}
+	public int getBookNumber() {
+		Connection conn = null;
+		Statement stmt = null;
+		int result = 0;
+		try {
+			// STEP 2: Register JDBC driver
+			Class.forName("com.mysql.jdbc.Driver");
+
+			// STEP 3: Open a connection
+			System.out.println("Connecting to database...");
+			conn = DriverManager.getConnection(DB_URL, USER, PASS);
+
+			// STEP 4: Execute a query
+			System.out.println("Creating statement...");
+			stmt = conn.createStatement();
+
+			String sql = "SELECT COUNT(bookname) FROM sharebooks.book_data WHERE bookname IS NOT NULL";
+			ResultSet rs = stmt.executeQuery(sql);
+			
+			if(rs.next())
+				result = Integer.parseInt(rs.getString("COUNT(bookname)"));
+			
+			// STEP 5: Clean-up environment
+			rs.close();
+			conn.close();
+		} catch (SQLException se) {
+			// Handle errors for JDBC
+			se.printStackTrace();
+		} catch (Exception e) {
+			// Handle errors for Class.forName
+			e.printStackTrace();
+		} finally {
+			// finally block used to close resources
+			try {
+				if (stmt != null)
+					stmt.close();
+			} catch (SQLException se2) {
+			} // nothing we can do
+			try {
+				if (conn != null)
+					conn.close();
+			} catch (SQLException se) {
+				se.printStackTrace();
+			} // end finally try
+		} // end try
+		return result;
+	}
+	public String getUserID(String bookID) {
+		Connection conn = null;
+		Statement stmt = null;
+		int result = 0;
+		try {
+			// STEP 2: Register JDBC driver
+			Class.forName("com.mysql.jdbc.Driver");
+
+			// STEP 3: Open a connection
+			System.out.println("Connecting to database...");
+			conn = DriverManager.getConnection(DB_URL, USER, PASS);
+
+			// STEP 4: Execute a query
+			System.out.println("Creating statement...");
+			stmt = conn.createStatement();
+
+			String sql = "SELECT uid FROM sharebooks.book_owner WHERE bid=" + bookID;
+			ResultSet rs = stmt.executeQuery(sql);
+			
+			if(rs.next())
+				result = Integer.parseInt(rs.getString("uid"));
+			
+			// STEP 5: Clean-up environment
+			rs.close();
+			conn.close();
+		} catch (SQLException se) {
+			// Handle errors for JDBC
+			se.printStackTrace();
+		} catch (Exception e) {
+			// Handle errors for Class.forName
+			e.printStackTrace();
+		} finally {
+			// finally block used to close resources
+			try {
+				if (stmt != null)
+					stmt.close();
+			} catch (SQLException se2) {
+			} // nothing we can do
+			try {
+				if (conn != null)
+					conn.close();
+			} catch (SQLException se) {
+				se.printStackTrace();
+			} // end finally try
+		} // end try
+		return Integer.toString(result);
 	}
 }

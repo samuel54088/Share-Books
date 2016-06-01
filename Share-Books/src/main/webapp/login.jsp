@@ -33,7 +33,13 @@
 <form method="POST" action="Update_book_owner.html">
 <input type="submit" value="分享書籍">
 </form>
+<<<<<<< HEAD
 <a href="Lend.html">借書</a>
+=======
+<form method="GET" action="query.jsp">
+<input type="submit" value="出借記錄">
+</form>
+>>>>>>> 119a2e5a20867d2c8043ff22d2a2a75190e53397
 <a href="index.jsp">回首頁</a>
 </body>
 </html>
