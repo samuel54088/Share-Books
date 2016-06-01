@@ -3,6 +3,7 @@
 <html>
 <body>
 <%
+	request.setCharacterEncoding("UTF-8");
 	DB d = new DB();
 	String name = request.getParameter("userName");
 	String mail = request.getParameter("email");
