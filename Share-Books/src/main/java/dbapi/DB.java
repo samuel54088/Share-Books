@@ -5,6 +5,8 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.*;
+import java.text.*;
 
 public class DB {
 	private final String DB_URL = "jdbc:mysql://140.134.26.83/sharebooks";
@@ -529,7 +531,11 @@ public class DB {
 		String[] id_buffer = new String[2];
 		Connection conn = null;
 		Statement stmt = null;
-
+		String local_time;
+		Date d=new Date();
+		SimpleDateFormat sdf=new SimpleDateFormat();
+	    sdf.applyPattern("yyyy-MM-dd HH:mm:ss");  //套用新格式
+	    local_time = sdf.format(d);
 		try {
 			// STEP 2: Register JDBC driver
 			Class.forName("com.mysql.jdbc.Driver");
@@ -567,8 +573,8 @@ public class DB {
 			}
 			rs_book_id.close();
 
-			sql = "insert into sharebooks.book_owner(uid,bid,lend_state) values('" + id_buffer[0] + "','" + id_buffer[1]
-					+ "','0')";
+			sql = "insert into sharebooks.book_owner(uid,bid,lend_state,updated) values('" + id_buffer[0] + "','" + id_buffer[1]
+					+ "','0','"+ local_time +"')";
 			stmt.executeUpdate(sql);
 
 			stmt.close();
