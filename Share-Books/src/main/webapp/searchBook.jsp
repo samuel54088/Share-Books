@@ -23,20 +23,26 @@ String[][] bookInfo = db.getBookInfo();
     <td align="center"><b>作者<b/></td>
     <td align="center" width="80"><b>出版日期<b/></td>
     <td align="center"><b>出版商<b/></td>
-    <td align="center"><b>書籍描述<b/></td>
   </tr>
   <%
   	for (int i = 0; i < bookInfo.length; i++) {
-  		if(bookInfo[i][0].toLowerCase().lastIndexOf(keyword.toLowerCase()) != -1) {
+  		if(bookInfo[i][1].toLowerCase().lastIndexOf(keyword.toLowerCase()) != -1) {
   			out.print("<tr>");
-  	  		for(int j=0 ; j< bookInfo[0].length; j++)
-  	  			out.print("<td>" + bookInfo[i][j] + "</td>");
+  	  		for(int j=1 ; j< bookInfo[0].length-1; j++) { // -1是為了不顯示書籍描述
+  	  			if( j==1 ) 
+  	  				out.print("<td><a href='BookInfo.jsp?ID=" + bookInfo[i][0] + "'//>" + bookInfo[i][j] + "</a></td>");
+  	  			else
+  	  				out.print("<td>" + bookInfo[i][j] + "</td>");
+  	  		}
+  	  			
   	  		out.print("<tr/>");
   		}
-  		
   	}
   %>
   
 </table>
+<%
+out.print("總共有 " + db.getBookNumber() +"本書");
+%>
 </body>
 </html>
