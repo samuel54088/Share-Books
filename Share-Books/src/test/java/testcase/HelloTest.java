@@ -1,4 +1,4 @@
-package p2;
+package testcase;
 import static org.junit.Assert.*;
 import p2.Hello;
 
