@@ -645,10 +645,10 @@ public class DB {
 			while (rs.next()) {
 
 				result[i][0] = new String(rs.getString("bookname").getBytes("utf-8"), "utf-8");
-				result[i][1] = new String(rs.getString("description").getBytes("utf-8"), "utf-8");
-				result[i][2] = new String(rs.getString("author").getBytes("utf-8"), "utf-8");
+				result[i][1] = new String(rs.getString("author").getBytes("utf-8"), "utf-8");
+				result[i][2] = new String(rs.getString("publish_date").getBytes("utf-8"), "utf-8");
 				result[i][3] = new String(rs.getString("publisher").getBytes("utf-8"), "utf-8");
-				result[i][4] = new String(rs.getString("publish_date").getBytes("utf-8"), "utf-8");
+				result[i][4] = new String(rs.getString("description").getBytes("utf-8"), "utf-8");
 				i++;
 
 			} 
