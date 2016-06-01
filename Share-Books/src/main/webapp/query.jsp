@@ -5,23 +5,24 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>借書</title>
+<title>查詢</title>
 </head>
 <body>
 	<%
 		DB d = new DB();
 		String email = session.getAttribute("EMAIL").toString();
 		System.out.println(email);
-		String bid = request.getParameter("bid");
-		String ownid = request.getParameter("owner_id");
 		Boolean infomation = false;
-
-		infomation = d.Lend(email, bid, ownid);
-
-		if (infomation) {
-			out.print("借閱成功!!" + "<br/>");
+		String[][] result = null;
+			result = d.query(email);
+		if (result != null) {
+			out.print("借閱者ID\t書籍ID\t擁有者ID\t借閱狀態(0:未歸還, 1(歸還)\t資料更新日期\t資料建立日期<br/>");
+			for (int i = 0; i < result.length; i++) {
+				out.print(result[i][0] + "\t" + result[i][1] + "\t" + result[i][2] + "\t" + result[i][3] + "\t"
+						+ result[i][4] + "\t" + result[i][5] + "\t<br/>");
+			}
 		} else {
-			out.print("借閱失敗!!" + "<br/>");
+			out.print("查詢失敗!!" + "<br/>");
 		}
 	%>
 
