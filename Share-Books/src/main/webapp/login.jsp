@@ -33,7 +33,7 @@
 <form method="POST" action="Update_book_owner.html">
 <input type="submit" value="分享書籍">
 </form>
-
+<a href="Lend.html">借書</a>
 <a href="index.jsp">回首頁</a>
 </body>
 </html>

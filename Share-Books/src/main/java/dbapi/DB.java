@@ -223,7 +223,7 @@ public class DB {
 				uid = Integer.toString(rs.getInt("id"));
 			}
 
-			sql = "SELECT * FROM sharebooks.book_data where id='" + bid + "'";
+			sql = "SELECT * FROM sharebooks.book_owner where bid='" + bid + "' and lend_state=0";
 			rs = stmt.executeQuery(sql);
 			// STEP 5: Extract data from result set
 
@@ -240,8 +240,8 @@ public class DB {
 							+ bid + "','" + ownid + "','0')";
 					stmt.executeUpdate(sql);
 
-					sql = "update book_owner set lend_state='1' WHERE bid='" + bid + "' and uid='" + uid + "'";
-					stmt.executeUpdate(sql);
+					sql = "update sharebooks.book_owner set lend_state = 1 where uid=" + ownid + " and bid=" + bid;
+					stmt.execute(sql);
 
 					result = true;
 				}
@@ -312,25 +312,25 @@ public class DB {
 				result[rscount][1] = Integer.toString(rs.getInt("bid"));
 				result[rscount][2] = Integer.toString(rs.getInt("owner_id"));
 				result[rscount][3] = Integer.toString(rs.getInt("borrow_state"));
-				//result[rscount][4] = rs.getTime("updated").toString();
-				//result[rscount][5] = rs.getTime("created").toString();
+				// result[rscount][4] = rs.getTime("updated").toString();
+				// result[rscount][5] = rs.getTime("created").toString();
 				rscount++;
 			}
-			for(int i=0;i<result.length;i++){
+			for (int i = 0; i < result.length; i++) {
 				sql = "SELECT * FROM user_data where id='" + result[i][0] + "'";
 				rs = stmt.executeQuery(sql);
 				rs.next();
-				result[i][0]=rs.getString("username");
-				
+				result[i][0] = rs.getString("username");
+
 				sql = "SELECT * FROM book_data where id='" + result[i][1] + "'";
 				rs = stmt.executeQuery(sql);
 				rs.next();
-				result[i][1]=rs.getString("bookname");
-				
+				result[i][1] = rs.getString("bookname");
+
 				sql = "SELECT * FROM user_data where id='" + result[i][2] + "'";
 				rs = stmt.executeQuery(sql);
 				rs.next();
-				result[i][2]=rs.getString("username");
+				result[i][2] = rs.getString("username");
 			}
 			rs.close();
 			conn.close();
@@ -548,10 +548,10 @@ public class DB {
 		Connection conn = null;
 		Statement stmt = null;
 		String local_time;
-		Date d=new Date();
-		SimpleDateFormat sdf=new SimpleDateFormat();
-	    sdf.applyPattern("yyyy-MM-dd HH:mm:ss");  //套用新格式
-	    local_time = sdf.format(d);
+		Date d = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat();
+		sdf.applyPattern("yyyy-MM-dd HH:mm:ss"); // 套用新格式
+		local_time = sdf.format(d);
 		try {
 			// STEP 2: Register JDBC driver
 			Class.forName("com.mysql.jdbc.Driver");
@@ -589,8 +589,8 @@ public class DB {
 			}
 			rs_book_id.close();
 
-			sql = "insert into sharebooks.book_owner(uid,bid,lend_state,updated) values('" + id_buffer[0] + "','" + id_buffer[1]
-					+ "','0','"+ local_time +"')";
+			sql = "insert into sharebooks.book_owner(uid,bid,lend_state,updated) values('" + id_buffer[0] + "','"
+					+ id_buffer[1] + "','0','" + local_time + "')";
 			stmt.executeUpdate(sql);
 
 			stmt.close();
@@ -618,7 +618,7 @@ public class DB {
 
 		return "更新成功";
 	}
-	
+
 	public String[][] getBookInfo() {
 		Connection conn = null;
 		Statement stmt = null;
@@ -641,7 +641,7 @@ public class DB {
 			result = new String[6][5];
 			// STEP 5: Extract data from result set
 
-			int i=0;
+			int i = 0;
 			while (rs.next()) {
 
 				result[i][0] = new String(rs.getString("bookname").getBytes("utf-8"), "utf-8");
@@ -651,7 +651,7 @@ public class DB {
 				result[i][4] = new String(rs.getString("description").getBytes("utf-8"), "utf-8");
 				i++;
 
-			} 
+			}
 			// STEP 6: Clean-up environment
 			rs.close();
 			conn.close();
