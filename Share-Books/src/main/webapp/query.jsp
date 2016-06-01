@@ -8,6 +8,13 @@
 <title>查詢</title>
 </head>
 <body>
+	<table border="1">
+ 	 <tr>
+  	  <td align="center"><b>借閱者名稱<b/></td>
+  	  <td align="center"><b>書籍名稱<b/></td>
+ 	  <td align="center"><b>借閱狀態(0:未歸還, 1:歸還)<b/></td>
+	 </tr> 
+ 	
 	<%
 		DB d = new DB();
 		String email = session.getAttribute("EMAIL").toString();
@@ -15,16 +22,18 @@
 		Boolean infomation = false;
 		String[][] result = null;
 			result = d.query(email);
-		if (result != null) {
-			out.print("借閱者名稱&nbsp;&nbsp;&nbsp;書籍名稱&nbsp;&nbsp;&nbsp;借閱狀態(0:未歸還, 1:歸還)&nbsp;&nbsp;&nbsp;<br/>");
+		if (result != null) {			
+			out.print("<tr>");
 			for (int i = 0; i < result.length; i++) {
-				out.print(result[i][0] + "&nbsp;&nbsp;&nbsp;" + result[i][1] + "&nbsp;&nbsp;&nbsp;" + result[i][3] + "<br/>");
+				out.print("<td>" + result[i][0] + "</td><td>" + result[i][1] + "</td><td align=\"center\">" + result[i][3] + "</td><br/>");
 			}
+			out.print("<tr/>");
 		} else {
 			out.print("查詢失敗!!" + "<br/>");
 		}
 	%>
-
+	
+	</table>
 	<input type="button" name="goToIndexPage"
 		onclick="javascript:location.href='index.jsp'" value="回首頁">
 </body>
