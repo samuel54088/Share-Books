@@ -19,7 +19,7 @@ public class DB {
 		String[] result = new String[5];
 		Connection conn = null;
 		Statement stmt = null;
-
+		
 		try {
 			// STEP 2: Register JDBC driver
 			Class.forName("com.mysql.jdbc.Driver");

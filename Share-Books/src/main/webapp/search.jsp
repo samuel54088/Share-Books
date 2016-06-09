@@ -1,7 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page import="dbapi.*" %>
 
-
 <html>
   <head>
     <meta charset="utf-8" />
@@ -26,10 +25,10 @@
             <li role="presentation">
               <a href="Login.html">登入</a>
             </li>
-            <li role="presentation" class="active">
+            <li role="presentation">
               <a href="Register.html">註冊</a>
             </li>
-			<li role="presentation">
+			<li role="presentation" class="active">
               <a href="#">尋找書籍</a>
             </li>
           </ul>
@@ -42,19 +41,41 @@
 <%
 	request.setCharacterEncoding("UTF-8");
 	DB d = new DB();
-	String name = request.getParameter("userName");
 	String mail = request.getParameter("email");
 	String pwd = request.getParameter("password");
-	String phone = request.getParameter("phone");
-	
-	String[] infomation = {name, mail, pwd, phone};
-	if(d.Reg(infomation))
-		out.print("<h1><font face=\"微軟正黑體\"><b>註冊成功 </b></font></h1><br/>");
-	else
-		out.print("<h1><font face=\"微軟正黑體\"><b>註冊失敗 </b></font></h1><br/>");
-		
+	session.setAttribute("EMAIL",request.getParameter("email")); //抓使用者信箱、密碼，修改資料可以利用session去update資料庫
+	session.setAttribute("PWD",request.getParameter("password"));
+	String[] infomation = d.Auth(mail, pwd);
+	if(infomation[1] != null) 
+		out.print("<h1>Hello  " + infomation[1] + ", 趕快搜尋您有興趣的書籍吧!!" + "</h1>");
+	else 
+		response.sendRedirect("LoginError.html");
+
 %>
-      <input type="button" class="btn btn-info btn-lg" name="goToIndexPage" onclick="javascript:location.href='index.jsp'" value="回首頁">
+	<form method="POST" action="searchBook.jsp">
+		<h3><b>關鍵字：</b></h3>
+		<input type="text" class="form-control" name="keyword" size="15"><br/>
+		<input type="submit" class="btn btn-default btn-lg" value="搜尋">
+	</form>
+		
+	<br/><br/>
+	
+	<form method="POST" action="Update_book_owner.html">
+		<input type="submit" class="btn btn-info btn-lg" value="我要分享書籍">
+	</form>
+	
+	<form method="POST" action="Modify.html">
+		<input name="email" type="hidden"  value=" + mail + ">
+		<input name="pwd" type="hidden"  value=" + pwd + ">
+		<input type="submit" class="btn btn-warning" value="修改會員資料">
+	</form>
+
+	<a href="Lend.html">借書</a>
+		
+	<form method="GET" action="query.jsp">
+		<input type="submit" class="btn btn-danger" value="我的出借記錄">
+	</form>
+
 	</div>
   </body>
 </html>
