@@ -1,14 +1,52 @@
 <html>
-<head>
-<meta charset="UTF-8">
-<title> ShareBooks </title>
-</head>
-<h1><font face="微軟正黑體"><b> <a href="index.jsp">Share-Books</a> 註冊帳號 </b></font></h1>
-<form method="POST" action="register.jsp">
-姓名：<input type="text" name="userName" size="15"><br/>
-帳號(e-mail)：<input type="text" name="email" size="30"><br/>
-密碼：<input type="password" name="password" size="15"><br/>
-連絡電話：<input type="text" name="phone" size="15"><br/>
-<input type="submit" value="註冊">
-</form>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <link rel="icon" href="/Content/AssetsBS3/img/favicon.ico" />
+    <title>註冊會員</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/Content/AssetsBS3/examples/signin.css" rel="stylesheet" />
+    <script src="/Scripts/AssetsBS3/ie-emulation-modes-warning.js"></script>
+  </head>
+  <body>
+  <div class="container">
+      <div class="header">
+        <nav>
+          <ul class="nav nav-pills pull-right">
+            <li role="presentation">
+              <a href="index.jsp">首頁</a>
+            </li>
+            <li role="presentation">
+              <a href="Login.html">登入</a>
+            </li>
+            <li role="presentation" class="active">
+              <a href="Register.html">註冊</a>
+            </li>
+			<li role="presentation">
+              <a href="#">尋找書籍</a>
+            </li>
+          </ul>
+        </nav>
+        <h1 class="text-muted"><b>Share-Books</b></h1>
+      </div>
+	  <hr>
+	</div>
+	<div class="container">
+		<h1><font face="微軟正黑體"><b>註冊帳號 </b></font></h1>
+		<form method="POST" action="register.jsp">
+		<font face="微軟正黑體" size=4><b>姓名(限英文)： </b></font>
+		<input type="text" class="form-control" name="userName"><br/>
+		<font face="微軟正黑體" size=4><b>帳號(e-mail)： </b></font>
+		<input type="text" class="form-control" name="email"><br/>
+		<font face="微軟正黑體" size=4><b>密碼： </b></font>
+		<input type="password" class="form-control" name="password"><br/>
+		<font face="微軟正黑體" size=4><b>連絡電話： </b></font>
+		<input type="text" class="form-control" name="phone"><br/>
+		<input type="submit" value="註冊">
+		</form>
+	</div>
+  </body>
 </html>
