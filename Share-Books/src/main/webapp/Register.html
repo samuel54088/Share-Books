@@ -38,7 +38,7 @@
 		<h1><font face="微軟正黑體"><b>註冊帳號 </b></font></h1>
 		<form method="POST" action="register.jsp">
 		<font face="微軟正黑體" size=4><b>姓名(限英文)： </b></font>
-		<input type="text" class="form-control" name="userName"><br/>
+		<input type="text" class="form-control" name="userName" onkeyup="value=value.replace(/[^\w\.\/]/ig,'')"><br/>
 		<font face="微軟正黑體" size=4><b>帳號(e-mail)： </b></font>
 		<input type="text" class="form-control" name="email"><br/>
 		<font face="微軟正黑體" size=4><b>密碼： </b></font>
