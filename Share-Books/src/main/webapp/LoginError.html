@@ -1,18 +1,36 @@
 <html>
-<head>
-<meta charset="UTF-8">
-<title> ShareBooks </title>
-</head>
-<h1><font face="微軟正黑體"><b><a href="index.jsp">Share-Books</a> 會員登入</b></font></h1>
-<script type="text/javascript">
+  <head>
+    <meta name="generator"
+    content="HTML Tidy for HTML5 (experimental) for Windows https://github.com/w3c/tidy-html5/tree/c63cc39" />
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <link rel="icon" href="/Content/AssetsBS3/img/favicon.ico" />
+    <title>Share-Books 會員登入</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/Content/AssetsBS3/examples/signin.css" rel="stylesheet" />
+    <script src="/Scripts/AssetsBS3/ie-emulation-modes-warning.js"></script>
+  </head>
+  <script type="text/javascript">
 
   alert("登入失敗，帳號或密碼錯誤!!")
 
-</script>
-<form method="POST" action="login.jsp">
-帳號(e-mail)：<input type="text" name="email" size="30"><br/>
-密碼：<input type="password" name="password" size="15"><br/>
-<input type="submit" value="登入">
-</form>
-<input type="button" name="register" onclick="javascript:location.href='Register.html'" value="註冊帳號">
+  </script>
+  <body>
+    <div class="container">
+      <form class="form-signin" role="form" method="POST" action="login.jsp">
+      <h2 class="form-signin-heading">Share-Books 會員登入</h2>
+      <label for="inputEmail" class="sr-only">帳號(email)</label> 
+      <input id="inputEmail" name="email" class="form-control" placeholder="帳號(email)" /> 
+      <label for="inputPassword" class="sr-only">密碼</label> 
+      <input type="password" id="inputPassword" name="password" class="form-control" placeholder="密碼" />
+	  <br/>
+      <button class="btn btn-lg btn-primary btn-block" type="submit">登入</button>
+      </form>
+      <button class="btn btn-info btn-lg" onclick="javascript:location.href='Register.html'">註冊帳號</button>
+    </div>
+    <script src="/Scripts/AssetsBS3/ie10-viewport-bug-workaround.js"></script>
+  </body>
 </html>

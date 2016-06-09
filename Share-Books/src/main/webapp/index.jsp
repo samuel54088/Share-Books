@@ -7,7 +7,7 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
     <link rel="icon" href="/Content/AssetsBS3/img/favicon.ico" />
-    <title>Narrow Jumbotron Template for Bootstrap</title>
+    <title>Share-Books</title>
     <link href="css/bootstrap.min.css" rel="stylesheet" />
     <link href="/Content/AssetsBS3/examples/jumbotron-narrow.css" rel="stylesheet" />
     <!--[if lt IE 9]><script src=~/Scripts/AssetsBS3/ie8-responsive-file-warning.js></script><![endif]-->
@@ -33,7 +33,7 @@
             </li>
           </ul>
         </nav>
-        <h1 class="text-muted"><b>Share-Books</b></h3>
+        <h1 class="text-muted"><b>Share-Books</b></h1>
       </div>
 	  <hr>
       <div class="jumbotron">
