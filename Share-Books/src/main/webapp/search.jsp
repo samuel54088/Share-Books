@@ -9,7 +9,7 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
     <link rel="icon" href="/Content/AssetsBS3/img/favicon.ico" />
-    <title>註冊會員</title>
+    <title>Share-Books</title>
     <link href="css/bootstrap.min.css" rel="stylesheet" />
     <link href="/Content/AssetsBS3/examples/signin.css" rel="stylesheet" />
     <script src="/Scripts/AssetsBS3/ie-emulation-modes-warning.js"></script>
@@ -40,16 +40,13 @@
 	<div class="container">
 <%
 	request.setCharacterEncoding("UTF-8");
-	DB d = new DB();
-	String mail = request.getParameter("email");
-	String pwd = request.getParameter("password");
-	session.setAttribute("EMAIL",request.getParameter("email")); //抓使用者信箱、密碼，修改資料可以利用session去update資料庫
-	session.setAttribute("PWD",request.getParameter("password"));
-	String[] infomation = d.Auth(mail, pwd);
-	if(infomation[1] != null) 
-		out.print("<h1>Hello  " + infomation[1] + ", 趕快搜尋您有興趣的書籍吧!!" + "</h1>");
-	else 
-		response.sendRedirect("LoginError.html");
+	
+	if(session.getAttribute("USER") == null) {
+		response.sendRedirect("http://localhost:8080/Share-Books/identify.jsp");
+	}
+	else{
+		out.print("<h1>Hello  " + session.getAttribute("USER") + ", 趕快搜尋您有興趣的書籍吧!!" + "</h1>");
+	}
 
 %>
 	<form method="POST" action="searchBook.jsp">

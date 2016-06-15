@@ -1,3 +1,7 @@
+<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ page import="dbapi.*" %>
+
+
 <html>
   <head>
     <meta name="generator"
@@ -21,7 +25,7 @@
             <li role="presentation">
               <a href="index.jsp">首頁</a>
             </li>
-            <li role="presentation" class="active">
+            <li role="presentation">
               <a href="Login.html">登入</a>
             </li>
             <li role="presentation">
@@ -37,16 +41,19 @@
 	  <hr>
 	</div>
     <div class="container">
-      <form class="form-signin" role="form" method="POST" action="login.jsp">
-      <h2 class="form-signin-heading"><font face="微軟正黑體"><b>會員登入</b></font></h2>
-      <label for="inputEmail" class="sr-only">帳號(email)</label> 
-      <input id="inputEmail" name="email" class="form-control" placeholder="帳號(email)" /> 
-      <label for="inputPassword" class="sr-only">密碼</label> 
-      <input type="password" id="inputPassword" name="password" class="form-control" placeholder="密碼" />
-	  <br/>
-      <button class="btn btn-lg btn-primary btn-block" type="submit">登入</button>
-      </form>
-      <button class="btn btn-info btn-lg" onclick="javascript:location.href='Register.html'">註冊帳號</button>
+      <%
+		request.setCharacterEncoding("UTF-8");
+		if(session.getAttribute("EMAIL") == null) {
+			String URL = "http://localhost:8080/Share-Books/Login.html";
+			response.setHeader("Refresh", "3; " + URL);
+	        out.println("<h1>歡迎光臨Share-Books!! 請先登入會員，3秒後進入登入頁面!!</h1>");
+		}
+		if(session.getAttribute("EMAIL") != null) {
+			String URL = "http://localhost:8080/Share-Books/search.jsp";
+			response.setHeader("Refresh", "3; " + URL);
+	        out.println("<h1>Hello, " + session.getAttribute("USER") + "!! 歡迎光臨Share-Books, 3秒後進入會員頁面!!</h1>");
+		}
+	%>
     </div>
     <script src="/Scripts/AssetsBS3/ie10-viewport-bug-workaround.js"></script>
   </body>

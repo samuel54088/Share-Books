@@ -29,7 +29,7 @@
               <a href="Register.html">註冊</a>
             </li>
 			<li role="presentation">
-              <a href="#">尋找書籍</a>
+              <a href="identify.jsp">尋找書籍</a>
             </li>
           </ul>
         </nav>
@@ -40,7 +40,7 @@
         <h1><font face="微軟正黑體"><b>分享您喜愛的書籍</b></font></h1>
         <p class="lead">在這裡可以自由的分享書籍，您也可以在我們的網站搜尋其他人分享的書籍，並向他借閱！！</p>
         <p>
-          <a class="btn btn-lg btn-success" href="#" role="button"><font face="微軟正黑體"><b>馬上搜尋書籍</b></font></a>
+          <a class="btn btn-lg btn-success" href="identify.jsp" role="button"><font face="微軟正黑體"><b>馬上搜尋書籍</b></font></a>
         </p>
       </div>
       <div class="row marketing">
