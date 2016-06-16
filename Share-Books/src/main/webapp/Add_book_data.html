@@ -1,16 +1,56 @@
 <html>
-<head>
-<meta charset="UTF-8">
-<title> ShareBooks </title>
-</head>
-<h1>新增書本資料</h1>
-<form method="POST" action="add_book_data.jsp">
-ISBN(10)：<input type="text" name="isbn" size="10"><br/>
-書名：<input type="text" name="bookname" size="1000"><br/>
-簡介 (1000字以內)：<input type="text" name="description" size="1000"><br/>
-作者：<input type="text" name="author" size="1000"><br/>
-出版商：<input type="text" name="publisher" size="1000"><br/>
-出版日期 (年-月-日, XXXX-XX-XX)：<input type="text" name="publish_date" size="10"><br/>
-<input type="submit" value="新增">
-</form>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <link rel="icon" href="/Content/AssetsBS3/img/favicon.ico" />
+    <title>Share-Books</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/Content/AssetsBS3/examples/signin.css" rel="stylesheet" />
+    <script src="/Scripts/AssetsBS3/ie-emulation-modes-warning.js"></script>
+  </head>
+  <body>
+  <div class="container">
+      <div class="header">
+        <nav>
+          <ul class="nav nav-pills pull-right">
+            <li role="presentation">
+              <a href="index.jsp">首頁</a>
+            </li>
+            <li role="presentation">
+              <a href="Login.html">登入</a>
+            </li>
+            <li role="presentation">
+              <a href="Register.html">註冊</a>
+            </li>
+			<li role="presentation">
+              <a href="identify.jsp">尋找書籍</a>
+            </li>
+          </ul>
+        </nav>
+        <h1 class="text-muted"><b>Share-Books</b></h1>
+      </div>
+	  <hr>
+	</div>
+	<div class="container">
+		<h1>新增書本資料</h1>
+		<form method="POST" action="add_book_data.jsp">
+		<font face="微軟正黑體" size=4><b>ISBN(10)： </b></font>
+		<input type="text" name="isbn" class="form-control" maxlength="10"><br/>
+		<font face="微軟正黑體" size=4><b>書名： </b></font>
+		<input type="text" name="bookname" class="form-control"><br/>
+		<font face="微軟正黑體" size=4><b>簡介 (1000字以內)： </b></font>
+		<input type="text" name="description" class="form-control"><br/>
+		<font face="微軟正黑體" size=4><b>作者： </b></font>
+		<input type="text" name="author" class="form-control"><br/>
+		<font face="微軟正黑體" size=4><b>出版商：</b></font>
+		<input type="text" name="publisher" class="form-control"><br/>
+		<font face="微軟正黑體" size=4><b>出版日期 (年-月-日, XXXX-XX-XX)： </b></font>
+		<input type="text" name="publish_date" class="form-control" placeholder="ex: 2016-01-05"><br/>
+		<input type="submit" class="btn btn-info btn-lg" value="新增">
+		</form>
+	</div>
+  </body>
 </html>

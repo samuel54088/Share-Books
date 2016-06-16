@@ -30,7 +30,7 @@
               <a href="Register.html">註冊</a>
             </li>
 			<li role="presentation" class="active">
-              <a href="#">尋找書籍</a>
+              <a href="identify.jsp">尋找書籍</a>
             </li>
           </ul>
         </nav>
