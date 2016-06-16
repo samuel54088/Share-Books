@@ -1,34 +1,52 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ page import="dbapi.*" %>
+<%@ page contentType="text/html; charset=UTF-8" %>
 <html>
-<body>
-<%
-	DB d = new DB();
-				
-	String obj_mail = (String) session.getAttribute("EMAIL");
-	String obj_pwd = (String) session.getAttribute("PWD");
-	
-	String name = request.getParameter("userName");
-	String mail = request.getParameter("email");
-	String pwd = request.getParameter("password");
-	String phone = request.getParameter("phone");
-				
-	String[] infomation = {name, mail, pwd, phone,obj_mail,obj_pwd};
-	
-	if(d.Modify(infomation)) {
-		out.print("修改成功!!" + "<br/>");
-		out.print("姓名修改為: " + name + "<br>");
-		out.print("信箱修改為: " + mail + "<br>");
-		out.print("密碼修改為: " + pwd + "<br>");
-		out.print("電話修改為: " + phone + "<br>");
-		//out.print("test session mail: " + obj_mail + "<br>");
-		//out.print("test session pwd: " + obj_pwd + "<br>");
-	}
-	else
-		out.print("修改失敗!!" + "<br/>");
-%>
-<input type="button" name="goToIndexPage" onclick="javascript:location.href='index.jsp'" value="回首頁">
-<br/><br/>
-</body>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <link rel="icon" href="/Content/AssetsBS3/img/favicon.ico" />
+    <title>Share-Books</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/Content/AssetsBS3/examples/signin.css" rel="stylesheet" />
+    <script src="/Scripts/AssetsBS3/ie-emulation-modes-warning.js"></script>
+  </head>
+  <body>
+  <div class="container">
+      <div class="header">
+        <nav>
+          <ul class="nav nav-pills pull-right">
+            <li role="presentation">
+              <a href="index.jsp">首頁</a>
+            </li>
+            <li role="presentation">
+              <a href="Login.html">登入</a>
+            </li>
+            <li role="presentation">
+              <a href="Register.html">註冊</a>
+            </li>
+			<li role="presentation">
+              <a href="identify.jsp">尋找書籍</a>
+            </li>
+          </ul>
+        </nav>
+        <h1 class="text-muted"><b>Share-Books</b></h1>
+      </div>
+	  <hr>
+	</div>
+	<div class="container">
+		<form method="POST" action="checkModify.jsp">
+		<font face="微軟正黑體" size=4><b>將姓名更改為： </b></font>
+		<input type="text" class="form-control" name="userName" placeholder=<%=request.getParameter("name") %> size="15"><br/>
+		<font face="微軟正黑體" size=4><b>將帳號(e-mail)更改為： </b></font>
+		<input type="text" class="form-control" name="email" placeholder=<%=request.getParameter("email") %> size="30"><br/>
+		<font face="微軟正黑體" size=4><b>將密碼更改為： </b></font>
+		<input type="password" class="form-control" name="password" size="15"><br/>
+		<font face="微軟正黑體" size=4><b>將連絡電話更改為： </b></font>
+		<input type="text" class="form-control" name="phone" placeholder=<%=request.getParameter("phone") %> size="15"><br/>
+		<input type="submit" class="btn btn-info btn-lg" value="確定修改">
+		</form>
+	</div>
+  </body>
 </html>
