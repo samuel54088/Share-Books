@@ -9,30 +9,32 @@
 </head>
 <body>
 	<table border="1">
- 	 <tr>
-  	  <td align="center"><b>借閱者名稱</b></td>
-  	  <td align="center"><b>書籍名稱</b></td>
- 	  <td align="center"><b>借閱狀態(0:未歸還, 1:歸還)</b></td>
-	 </tr> 
- 	
-	<%
-		DB d = new DB();
-		String email = session.getAttribute("EMAIL").toString();
-		System.out.println(email);
-		Boolean infomation = false;
-		String[][] result = null;
+		<tr>
+			<td align="center"><b>借閱者名稱</b></td>
+			<td align="center"><b>書籍名稱</b></td>
+			<td align="center"><b>借閱狀態(0:未歸還, 1:歸還)</b></td>
+		</tr>
+
+		<%
+			DB d = new DB();
+			String email = session.getAttribute("EMAIL").toString();
+						
+			System.out.println(email);
+			Boolean infomation = false;
+			String[][] result = null;
 			result = d.query(email);
-		if (result != null) {			
-			out.print("<tr>");
-			for (int i = 0; i < result.length; i++) {
-				out.print("<td>" + result[i][0] + "</td><td>" + result[i][1] + "</td><td align=\"center\">" + result[i][3] + "</td><br/>");
+
+			if (result != null) {
+				for (int i = 0; i < result.length; i++) {
+					
+					out.print("<tr><td>" + result[i][0] + "</td><td>" + result[i][1] + "</td><td align=\"center\">"
+							+ result[i][3] + "</td><tr/>");
+				}
+			} else {
+				out.print("查詢失敗!!" + "<br/>");
 			}
-			out.print("<tr/>");
-		} else {
-			out.print("查詢失敗!!" + "<br/>");
-		}
-	%>
-	
+		%>
+
 	</table>
 	<input type="button" name="goToIndexPage"
 		onclick="javascript:location.href='index.jsp'" value="回首頁">
