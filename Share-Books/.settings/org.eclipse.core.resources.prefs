@@ -1,5 +1,9 @@
 eclipse.preferences.version=1
 encoding//src/main/java/dbapi/DB.java=UTF-8
 encoding//src/main/webapp/index.jsp=UTF-8
+<<<<<<< HEAD
 encoding//src/main/webapp/lend.jsp=UTF-8
+=======
+encoding//src/main/webapp/modify.jsp=UTF-8
+>>>>>>> 4d1fba9389c35d3ec359f0ed2e3348f7aeedf8bb
 encoding//src/main/webapp/searchBook.jsp=UTF-8

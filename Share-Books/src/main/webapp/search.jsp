@@ -61,7 +61,7 @@
 		<input type="submit" class="btn btn-info btn-lg" value="我要分享書籍">
 	</form>
 	
-	<form method="POST" action="Modify.html">
+	<form method="POST" action="GetUserData.jsp">
 		<input name="email" type="hidden"  value=" + mail + ">
 		<input name="pwd" type="hidden"  value=" + pwd + ">
 		<input type="submit" class="btn btn-warning" value="修改會員資料">
